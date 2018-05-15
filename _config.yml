@@ -11,14 +11,14 @@ github_repo: "https://github.com/HanWang945/hanwang945.github.com.git" # you cod
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "仰望星空!"
+sidebar-about-description: "HanWang"
 sidebar-avatar: /img/Itachi.jpg    # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
 # SNS settings
 RSS: false
-# weibo_username:     qiubaiying
+weibo_username:     寒风中的笃定前行
 zhihu_username:     qiubaiying
 github_username:    qiubaiying
 facebook_username:  baiying.qiu.7
