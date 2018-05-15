@@ -1,9 +1,9 @@
 # Site settings
-title: BY Blog
+title: HanWang Blog
 SEOTitle: HanWang的博客 | 仰望星空
 header-img: img/ywxk.jpg
 email: 420877730@qq.com
-description: "Every failure is leading towards success."
+description: "仰望星空."
 keyword: "HanWang"
 url: "http://hanwang945.github.io"          # your host, for absolute URL
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
@@ -11,7 +11,7 @@ github_repo: "https://github.com/HanWang945/hanwang945.github.com.git" # you cod
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "Goals determine what you going to be!"
+sidebar-about-description: "仰望星空!"
 sidebar-avatar: /img/about-BY-gentle.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
