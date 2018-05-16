@@ -3,6 +3,7 @@
 ![](https://i.imgur.com/AewGAct.jpg)
 ### 1、BeanFactory： 所有bean工厂的基类 ###
       所有的bean工厂根据各自实现不同的功能并都从BeanFactory派生。
+      
 ### 2、ListableBeanFacotry： 实现可以枚举所有bean实例对象的bean工厂类 ###
       ListableBeanFacotry（BeanFactory的 第一级派生类），提供了预加载所有bean定义信息的功能，就像XML bean工厂.
       ListableBeanFacotry接口有两个实现类：DefaultListableBeanFactory和StaticListableBeanFactory。
