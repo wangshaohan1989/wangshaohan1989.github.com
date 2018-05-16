@@ -1,7 +1,6 @@
 # Spring-bean源码解析 #
 ## 一、Bean工厂（Bean Factory）结构分析 ##
-![Bean 工厂结构图](https://i.imgur.com/TSTHfYe.jpg)
-
+![](https://i.imgur.com/AewGAct.jpg)
 ### 1、BeanFactory： 所有bean工厂的基类
       所有的bean工厂根据各自实现不同的功能并都从BeanFactory派生。
 ### 2、ListableBeanFacotry： 实现可以枚举所有bean实例对象的bean工厂类
