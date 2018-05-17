@@ -3,18 +3,17 @@
 ## 一、Bean工厂结构分析 ##
 ![](https://i.imgur.com/AewGAct.jpg)
 ### 1、BeanFactory： 所有bean工厂的基类 ###
-	 所有的bean工厂根据各自实现不同的功能并都从BeanFactory派生。
-
-### 2、ListableBeanFacotry：实现可以枚举所有bean实例对象的bean工厂类 ###
-      ListableBeanFacotry（BeanFactory的 第一级派生类），提供了预加载所有bean定义信息的功能，就像XML bean工厂.
-      ListableBeanFacotry接口有两个实现类：DefaultListableBeanFactory和StaticListableBeanFactory。
-      DefaultListableBeanFactory提供了在访问bean定义之前注册所有bean实例的功能，
-	  而StaticListableBeanFactory只用于管理已经创建的bean实例
-
-### 3、HierarchicalBeanFactory：实现BeanFacotry的层次化结构 ###
-      BeanFactory的 第一级派生类， 由bean工厂实现的子接口，它可以是层次化结果的一部分 
-	  在可配置的方式的bean工厂（ConfigurableBeanFactory）接口中可以找到 相应于bean工厂的
-	  setParentBeanFactory方法，它允许以可配置的方式设置父工厂。
+    所有的bean工厂根据各自实现不同的功能并都从BeanFactory派生
+### 2.ListableBeanFacotry：实现可以枚举所有bean实例对象的bean工厂类 ###
+    ListableBeanFacotry（BeanFactory的 第一级派生类），提供了预加载所有bean定义信息的
+    功能，就像XML bean工厂.ListableBeanFacotry接口有两个实现类：
+    DefaultListableBeanFactory和StaticListableBeanFactory。
+    DefaultListableBeanFactory提供了在访问bean定义之前注册所有bean实例的功能，而
+    StaticListableBeanFactory只用于管理已经创建的bean实例HierarchicalBeanFactory：
+    实现BeanFacotry的层次化结构. 
+    由bean工厂实现的子接口，它可以是层次化结果的一部分.在可配置的方式的bean工厂
+    （ConfigurableBeanFactory）接口中可以找到 相应于bean工厂的setParentBeanFactory方
+    法，它允许以可配置的方式设置父工厂。
      
 ### 4、AutowireCapableBeanFacotry：实现可以自动装配和公布实例的bean工厂. ###
       BeanFactory的 第一级派生类。bean工厂类实现当前这个扩展BeanFacotry的接口，可以获得自动装配，
@@ -35,16 +34,20 @@
 ### 6、ConfigurableListableBeanFactory：提供了工具以分析和修改bean定义以及预实例化单例 ###
       继承于ListableBeanFactory, AutowireCapableBeanFactory, ConfigurableBeanFactory，
       由大部分可枚举bean实例的bean工厂实现。仅限于Spring框架内部使用。
-	  由大部可以枚举的bean工厂实现配置接口。此外，ConfigurableBeanFactory它还提供了工具以分析和修改bean定义以及预实例化单例
+	  由大部可以枚举的bean工厂实现配置接口。此外，ConfigurableBeanFactory
+      它还提供了工具以分析和修改bean定义以及预实例化单例
 
 ### 7、AbstractBeanFactory：bean工厂的抽象实现类 ###
       实现ConfigurableBeanFactory接口，继承FactoryBeanRegistrySupport。
-	  AbstractBeanFactory:实现BeanFactory接口的抽象基类，提供所有的ConfigurableBeanFactory SPI功能。
+	  AbstractBeanFactory:实现BeanFactory接口的抽象基类，
+      提供所有的ConfigurableBeanFactory SPI功能。
 	  这个类提供了一个单例缓存（通过他的基类DefaultSingletonBeanRegistry进行单例/原型判定，通过FactoryBean处理别名
 	  和子bean定义的bean定义合并以及bean 销毁通过DisposableBean接口自定义销毁方法）
 	  此外，他可以管理一个bean工厂的层级关系（继承关系）（在未知bean的情况下，委托给parent），通过
 	  实现HierarchicalBeanFactory接口。
-	  主要的模板方法由子类实现，方法有：getBeanDefinition：根据给定的bean名称检索bean定义。createBean，根据给定的bean定义创建一个bean实例。这些操作默认的实现在DefaultListableBeanFactory类和AbstractAutowireCapableBeanFactory类中可以找到
+	  主要的模板方法由子类实现，方法有：getBeanDefinition：根据给定的bean名称检索bean定义。
+      createBean，根据给定的bean定义创建一个bean实例。这些操作默认的实现在DefaultListableBeanFactory类
+      和AbstractAutowireCapableBeanFactory类中可以找到
 
 ### 8、AbstractAutowireCapableBeanFactory： ###
       继承AbstractBeanFactory，实现AutowireCapableBeanFactory接口。
@@ -69,11 +72,13 @@
       一个基于bean定义对象的成熟的bean工厂接口ListableBeanFactory和BeanDefinitionRegistry的默认实现类。
 	  典型的用法是在访问bean之前，首先注册所有的bean定义。
 	  因此，在本地的bean定义表格中Bean定义查找操作是一个低廉的操作, 
-      操作是在预构建的bean定义元数据对象上。也可以用来当做一个单例的bean工厂，或者作为一个自定义bean工厂的基类 
+      操作是在预构建的bean定义元数据对象上。也可以用来当做一个单例的bean工厂，
+      或者作为一个自定义bean工厂的基类 
 	  注意：特定的bean定义格式的读取通常都是单独实现的，而不是作为一个bean工厂的子类.
 
 ### 10.StaticListableBeanFactory：ListableBeanFacotry接口的静态实现类 ###
-	  StaticListableBeanFactory为BeanFactory的静态实现类，允许以编码的方式注册存在的单例实例。不支持原型bean或者别名
+	 StaticListableBeanFactory为BeanFactory的静态实现类，
+     允许以编码的方式注册存在的单例实例。不支持原型bean或者别名
 
 
 ## 二、bean定义结构分析 ##
