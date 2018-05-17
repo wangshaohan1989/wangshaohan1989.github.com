@@ -1,24 +1,30 @@
 # Spring-bean源码解析 #
-## 一、Bean工厂（Bean Factory）结构分析 ##
+5/16/2018 3:43:16 PM 
+## 一、Bean工厂结构分析 ##
 ![](https://i.imgur.com/AewGAct.jpg)
 ### 1、BeanFactory： 所有bean工厂的基类 ###
-      所有的bean工厂根据各自实现不同的功能并都从BeanFactory派生。
-### 2、ListableBeanFacotry： 实现可以枚举所有bean实例对象的bean工厂类 ###
+	 所有的bean工厂根据各自实现不同的功能并都从BeanFactory派生。
+
+### 2、ListableBeanFacotry：实现可以枚举所有bean实例对象的bean工厂类 ###
       ListableBeanFacotry（BeanFactory的 第一级派生类），提供了预加载所有bean定义信息的功能，就像XML bean工厂.
       ListableBeanFacotry接口有两个实现类：DefaultListableBeanFactory和StaticListableBeanFactory。
       DefaultListableBeanFactory提供了在访问bean定义之前注册所有bean实例的功能，
 	  而StaticListableBeanFactory只用于管理已经创建的bean实例
+
 ### 3、HierarchicalBeanFactory：实现BeanFacotry的层次化结构 ###
-      BeanFactory的 第一级派生类， 由bean工厂实现的子接口，它可以是层次化结果的一部分 在可配置的方式的bean工厂（ConfigurableBeanFactory）接口中可以找到 相应于bean工厂的setParentBeanFactory方法，它允许以可配置的方式设置父工厂。     
+      BeanFactory的 第一级派生类， 由bean工厂实现的子接口，它可以是层次化结果的一部分 在可配置的方式的bean工厂（ConfigurableBeanFactory）接口中可以找到 相应于bean工厂的setParentBeanFactory方法，它允许以可配置的方式设置父工厂。
+     
 ### 4、AutowireCapableBeanFacotry：实现可以自动装配和公布实例的bean工厂. ###
       BeanFactory的 第一级派生类。bean工厂类实现当前这个扩展BeanFacotry的接口，可以获得自动装配，前提是他们想要为已经存在的bean实例公布它的功能。
 	  当前这个BeanFactory的子接口不意味着在通常的应用代码内使用。
 	  其他框架的集成代码可以利用当前这个接口来连接和填充已经存在的实例bean，并且Spring不控制他的生命周期。这个特别有用，例如：对于webWork Actions和Tapestry 页面对象。
 	  注意：当前这个接口表面上不是由ApplicationContext实现的，因为他们在应用代码内几乎不被使用。也就是说，他们在应用上下文内可以获得，通过ApplicationContext的getAutowireCapableBeanFactory方法
+
 ### 5、ConfigurableBeanFactory:实现可配置的bean工厂. ###
       继承于HierarchicalBeanFactory，仅限于在Spring框架内部使用。用于专门访问bean工厂配置方法。
 	  大部分由bean工厂实现配置接口。提供一个可以配置bean工厂的工具，除了在BeanFacotry接口内的bean工厂的客户端方法
 	  当前bean工厂接口不意味着可以被使用在正常的应用代码中，坚持BeanFactory或者ListableBeanFactory使用在典型的需求。这个扩展接口仅仅意味着允许框架内部插件应用，以专门访问bean工厂的配置方法
+
 ### 6、ConfigurableListableBeanFactory：提供了工具以分析和修改bean定义以及预实例化单例 ###
       继承于ListableBeanFactory, AutowireCapableBeanFactory, ConfigurableBeanFactory，
       由大部分可枚举bean实例的bean工厂实现。仅限于Spring框架内部使用。
@@ -45,3 +51,16 @@
 	  注意：特定的bean定义格式的读取通常都是单独实现的，而不是作为一个bean工厂的子类.
 ### 10.StaticListableBeanFactory：ListableBeanFacotry接口的静态实现类 ###
 	  StaticListableBeanFactory为BeanFactory的静态实现类，允许以编码的方式注册存在的单例实例。不支持原型bean或者别名
+
+## 二、bean定义结构分析 ##
+
+1. **BeanMetadataElement**
+	Bean元数据元素 由携带配置源对象的bean元数据元素实现的接口
+2. **AttributeAccessor** 属性访问器 接口定义一个通用规范，用于附加和访问任意对象的元数据。
+3. AttributeAccessor的实现类，提供一个所有方法的基本实现。由子类进行扩展
+4. **BeanMetadataAttributeAccessor**扩展AttributeAccessorSupport类，将属性作为BeanMetadataAttribute对象，以便跟踪定义源
+5. **BeanDefinition**   一个BeanDefinition描述了一个有属性值，构造器参数值以及由具体是西安提供的进一步信息bean实例  这是一个最小化接口：主要的目的是允许一个BeanFactoryPostProcessor比如：PropertyPlaceholderConfigurer，反射和修改属性值和其他bean的元数据
+6. **AbstractBeanDefinition** 用于具体的、成熟的BeanDefinition类的基类，分解GenericBeanDefinition、RootBeanDefinition和ChildBeanDefinition的常见属性
+7. **RootBeanDefinition** 一个根bean定义表示合并后的bean定义，它在运行时支持Spring BeanFactory中的特定bean。 它可能是从多个原始的bean定义中创建的，它们彼此继承，通常被注册为GenericBeanDefinition。 根bean定义实质上是“统一”在运行时视图bean定义。 在配置时期，根bean定义还可以用于注册个人的bean定义。然而，自Spring 2.5版本以来，以编码方式注册bean的定义的优先方式是GenericBeanDefinition类。 GenericBeanDefinition有优势，允许动态定义双亲依赖，而不是“硬编码”作为根bean定义的角色
+8. 
+	
