@@ -8,8 +8,8 @@
 
 ### 2.ListableBeanFacotry：实现可以枚举所有bean实例对象的bean工厂类
 	ListableBeanFacotry（BeanFactory的 第一级派生类），提供了预加载所有bean定义信息的
-    功能，就像XML bean工厂.ListableBeanFacotry接口有两个实现类： DefaultListableBeanFactory和StaticListableBeanFactory。
-
+    功能，就像XML bean工厂.ListableBeanFacotry接口有两个实现类：
+    DefaultListableBeanFactory和StaticListableBeanFactory。
 	DefaultListableBeanFactory提供了在访问bean定义之前注册所有bean实例的功能，而
 	StaticListableBeanFactory只用于管理已经创建的bean实例HierarchicalBeanFactory：实现
     BeanFacotry的层次化结构. 
@@ -43,8 +43,9 @@
     提供所有的ConfigurableBeanFactory SPI功能。
 	这个类提供了一个单例缓存（通过他的基类DefaultSingletonBeanRegistry进行单例/原型判定，通过
 	FactoryBean处理别名和子bean定义的bean定义合并以及bean 销毁通过DisposableBean接口自定义销毁方法）
-	此外，他可以管理一个bean工厂的层级关系（继承关系）（在未知bean的情况下，委托给parent），通过实现HierarchicalBeanFactory接口。主要的模板方法由子类实现，方法有：getBeanDefinition：根据给定的bean
-    名称检索bean定义。createBean，根据给定的bean定义创建一个bean实例。这些操作默认的实现在
+	此外，他可以管理一个bean工厂的层级关系（继承关系）（在未知bean的情况下，委托给parent），
+    通过实现HierarchicalBeanFactory接口。主要的模板方法由子类实现，方法有：getBeanDefinition：根据给定
+    的bean名称检索bean定义。createBean，根据给定的bean定义创建一个bean实例。这些操作默认的实现在
     DefaultListableBeanFactory类和AbstractAutowireCapableBeanFactory类中可以找到
 
 ### 7、AbstractAutowireCapableBeanFactory： 
@@ -56,7 +57,8 @@
 	供bean的创建（通过构造器解析），属性填充和注入（包括自动装配），
     以及初始化。处理运行时bean的引用，解析管理集合，调用初始化方法等等。
     支持构造器自动装配，通过名称和类型注入属性。
-	主要的模板方法由子类实现，方法有：resolveDependency(DependencyDescriptor, String, Set, TypeConverter)
+	主要的模板方法由子类实现，方法有：
+    `resolveDependency(DependencyDescriptor, String, Set, TypeConverter)`
     用于根据类型自动装配。
 	如果一个工厂可以搜索它的bean定义，则搜索匹配的的bean通常通过这样的搜索被实现。
     对于其他类型的工厂，可以实现的简单的匹配算法
