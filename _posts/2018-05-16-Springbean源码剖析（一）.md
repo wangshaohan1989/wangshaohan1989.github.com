@@ -4,24 +4,23 @@
 ![](https://i.imgur.com/AewGAct.jpg)
 
 ### 1、BeanFactory： 所有bean工厂的基类 
-    所有的bean工厂根据各自实现不同的功能并都从BeanFactory派生
+	所有的bean工厂根据各自实现不同的功能并都从BeanFactory派生
 
 ### 2.ListableBeanFacotry：实现可以枚举所有bean实例对象的bean工厂类
-      ListableBeanFacotry（BeanFactory的 第一级派生类），提供了预加载所有bean定义信息的
-      功能，就像XML bean工厂.ListableBeanFacotry接口有两个实现类： DefaultListableBeanFactory和StaticListableBeanFactory。DefaultListableBeanFactory提供了在访问bean定义之前注册所有bean实例的功
-      能，而StaticListableBeanFactory只用于管理已经创建的bean实例HierarchicalBeanFactory：实现
-      BeanFacotry的层次化结构.  由bean工厂实现的子接口，它可以是层次化结果的一部分.在可配置的方式的bean工厂
-     （ConfigurableBeanFactory）接口中可以找到 相应于bean工厂的setParentBeanFactory方法，它允许以可配置
-      的方式设置父工厂。
+	ListableBeanFacotry（BeanFactory的 第一级派生类），提供了预加载所有bean定义信息的
+    功能，就像XML bean工厂.ListableBeanFacotry接口有两个实现类： DefaultListableBeanFactory和StaticListableBeanFactory。DefaultListableBeanFactory提供了在访问bean定义之前注册所有bean实例的功
+    能，而StaticListableBeanFactory只用于管理已经创建的bean实例HierarchicalBeanFactory：实现
+    BeanFacotry的层次化结构.  由bean工厂实现的子接口，它可以是层次化结果的一部分.在可配置的方式的bean工厂（ConfigurableBeanFactory）接口中可以找到 相应于bean工厂的setParentBeanFactory方法，它允许以可配置
+    的方式设置父工厂。
      
 ### 3、AutowireCapableBeanFacotry：实现可以自动装配和公布实例的bean工厂. 
-      BeanFactory的 第一级派生类。bean工厂类实现当前这个扩展BeanFacotry的接口，可以获得自动装配，
-	  前提是他们想要为已经存在的bean实例公布它的功能。
-	  当前这个BeanFactory的子接口不意味着在通常的应用代码内使用。
-	  其他框架的集成代码可以利用当前这个接口来连接和填充已经存在的实例bean，
-	  并且Spring不控制他的生命周期。这个特别有用，例如：对于webWork Actions和Tapestry 页面对象。
-	  注意：当前这个接口表面上不是由ApplicationContext实现的，因为他们在应用代码内几乎不被使用。
-	 也就是说，他们在应用上下文内可以获得，通过ApplicationContext的getAutowireCapableBeanFactory方法
+    BeanFactory的 第一级派生类。bean工厂类实现当前这个扩展BeanFacotry的接口，可以获得自动装配，
+	前提是他们想要为已经存在的bean实例公布它的功能。
+	当前这个BeanFactory的子接口不意味着在通常的应用代码内使用。
+	其他框架的集成代码可以利用当前这个接口来连接和填充已经存在的实例bean，
+	并且Spring不控制他的生命周期。这个特别有用，例如：对于webWork Actions和Tapestry 页面对象。
+	注意：当前这个接口表面上不是由ApplicationContext实现的，因为他们在应用代码内几乎不被使用。
+	也就是说，他们在应用上下文内可以获得，通过ApplicationContext的getAutowireCapableBeanFactory方法
 
 ### 4、ConfigurableBeanFactory:实现可配置的bean工厂. 
       继承于HierarchicalBeanFactory，仅限于在Spring框架内部使用。用于专门访问bean工厂配置方法。
