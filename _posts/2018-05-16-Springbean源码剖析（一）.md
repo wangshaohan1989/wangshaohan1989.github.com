@@ -1,4 +1,4 @@
-# Spring-bean源码解析 IOC容器的基本实现
+# Spring-bean源码解析之类结构分析
 
 ## 一、Bean工厂类结构分析
 ![](https://i.imgur.com/AewGAct.jpg)
@@ -92,3 +92,22 @@
 7. **RootBeanDefinition** 一个根bean定义表示合并后的bean定义，它在运行时支持Spring BeanFactory中的特定bean。 它可能是从多个原始的bean定义中创建的，它们彼此继承，通常被注册为GenericBeanDefinition。 根bean定义实质上是“统一”在运行时视图bean定义。 在配置时期，根bean定义还可以用于注册个人的bean定义。然而，自Spring 2.5版本以来，以编码方式注册bean的定义的优先方式是GenericBeanDefinition类。 GenericBeanDefinition有优势，允许动态定义双亲依赖，而不是“硬编码”作为根bean定义的角色
 8. 
 	
+
+
+## 三、bean包装类结构分析 ##
+
+
+## 四、资源类结构分析 ##
+
+
+## 五、bean读取类结构分析 ##
+
+
+## 六、bean定义解析类结构分析 ##
+
+
+
+
+## 七、bean异常类结构分析 ##
+
+![](https://i.imgur.com/v44kLzu.jpg)
