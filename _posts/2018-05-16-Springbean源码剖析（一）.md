@@ -111,3 +111,27 @@
 ## 七、bean异常类结构分析 ##
 
 ![](https://i.imgur.com/v44kLzu.jpg)
+
+###1、Spring-bean异常类的基本结构###
+  
+1. **NestedRuntimeException**：运行时异常类
+2. **BeansException**：spring-bean内异常类的基类，派生于NestedRuntimeException运行时异常类。所以
+   spring-bean内的异常都是运行时异常类。
+3. **BeansException子类的分类**：<br/>
+  （1）按照是否为致命异常划分：也就是继承于FatalBeanException的子类均为致命异常类<br/>
+	*PropertyBatchUpdateException*：组合异常，由个别的PropertyAccessException实例所构成。	
+    类对象在绑定处理过程的是被创建，并且如果必要的话添加这些错误。当遇到应用程序层级的
+    PropertyAccessExceptions异常，这个绑定处理过程继续，应用那些可以应用的变化并且存储该类对象中的拒绝更改
+	
+	PropertyAccessException：属性访问相关的异常的基类
+
+    TypeMismatchException：当视尝试设置一个bean属性时抛出的一个类型不匹配异常
+
+    MethodInvocationException：当一个bean属性的getter或者setter方法抛出一个异常的时候抛出
+
+	
+
+
+  （2）按照异常发生位置划分：属性异常（如上图中的黄色标签）和bean异常（上图中的蓝色标签）
+
+  
