@@ -110,8 +110,7 @@
 
 
 ## 七、bean异常类结构分析 ##
-
-![](https://i.imgur.com/v44kLzu.jpg)
+![](https://i.imgur.com/ssv1w5Y.jpg)
 
 ###1、Spring-bean异常类的基本结构###
   
