@@ -82,7 +82,7 @@
 
 
 ## 二、bean定义类结构分析 
-
+![](https://i.imgur.com/CmFlnQw.jpg)
 1. **BeanMetadataElement**
 	Bean元数据元素 由携带配置源对象的bean元数据元素实现的接口
 2. **AttributeAccessor** 属性访问器 接口定义一个通用规范，用于附加和访问任意对象的元数据。
@@ -97,7 +97,7 @@
 
 ## 三、bean包装类结构分析 ##
 
-
+![](https://i.imgur.com/XxGrhsr.jpg)
 ## 四、资源类结构分析 ##
 
 
