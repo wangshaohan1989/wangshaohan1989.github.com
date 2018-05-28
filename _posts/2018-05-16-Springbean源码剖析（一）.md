@@ -123,6 +123,7 @@
   （1）**按照是否为致命异常划分** ： 也就是继承于FatalBeanException的子类均为致命异常类<br/>
   （2）**按照异常发生位置划分**：<span style='color:#CCBC14'><strong>属性异常</strong>（如上图中的黄色标签）</span>和<span style="color:blue"><strong>bean异常</strong>（上图中的蓝色标签）</span>
 
+![](https://i.imgur.com/FMtaxnh.jpg)
 4. **非致命属性异常类：**
 
 	*PropertyBatchUpdateException*：组合异常，由个别的PropertyAccessException实例所构成。	
@@ -151,14 +152,15 @@
 
 	*BeanNotOfRequiredTypeException*: 当一个bean不匹配期望的类型的时候抛出的异常
 
-	*BeanIsNotAFactoryException*:当一个bean不是一个工厂，但是一个用户试图获取根据给定的bean名称获取这个工厂
-    的是抛出的异常.一个bean是否是一个工厂取决于它是否实现FactoryBean这个接口 
+	*BeanIsNotAFactoryException*:当一个bean不是一个工厂，但是一个用户试图获取根据给定的bean名称获取这个工
+	厂的是抛出的异常.一个bean是否是一个工厂取决于它是否实现FactoryBean这个接口。
+	继承于BeanIsNotAFactoryException接口
 
 	*NoSuchBeanDefinitionException*:当一个BeanFactory调用一个bean实例化的时候没有发现一个定义的时候抛出的
 	异常这可能意味着一个不存在的bean，一个不唯一的bean或者一个手动注册的单例实例化没有关联bean定义的bean
 
 	*NoUniqueBeanDefinitionException*:当一个bean工厂BeanFactory调用一个ban实例的时候被发现有匹配的有多个
-	候选然而只需要匹配一个期望的时候
+	候选然而只需要匹配一个期望的时候。继承于NoSuchBeanDefinitionException
 
 
 7. **致命bean异常类**：
