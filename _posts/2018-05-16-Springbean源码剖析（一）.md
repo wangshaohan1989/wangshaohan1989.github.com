@@ -4,6 +4,7 @@
 ![](https://i.imgur.com/AewGAct.jpg)
 
 ### 1、BeanFactory： 所有bean工厂的基类 
+
 	所有的bean工厂根据各自实现不同的功能并都从BeanFactory派生
 
 ### 2.ListableBeanFacotry：实现可以枚举所有bean实例对象的bean工厂类
@@ -123,7 +124,7 @@
   （1）**按照是否为致命异常划分** ： 也就是继承于FatalBeanException的子类均为致命异常类<br/>
   （2）**按照异常发生位置划分**：<span style='color:#CCBC14'><strong>属性异常</strong>（如上图中的黄色标签）</span>和<span style="color:blue"><strong>bean异常</strong>（上图中的蓝色标签）</span>
 
-![](https://i.imgur.com/FMtaxnh.jpg)
+![](https://i.imgur.com/PBhYjJT.jpg)
 4. **非致命属性异常类：**
 
    ***PropertyBatchUpdateException***：组合异常，由个别的PropertyAccessException实例所构成。	
@@ -161,9 +162,16 @@
 
 	***NoUniqueBeanDefinitionException***:当一个bean工厂BeanFactory调用一个ban实例的时候被发现有匹配的有多个
 	候选然而只需要匹配一个期望的时候。继承于NoSuchBeanDefinitionException
-
+	
 
 7. **致命bean异常类**：
+
+	**BeanCreationException**:在一个BeanFactory bean工厂当试图从一个bean定义创建一个bean的时候遇到一个
+错误抛出的异常
+	***BeanCurrentlyInCreationException***:在引用一个当前正在创建的bean的时候抛出的异常,通常发生在构造器自动装
+	配与当前构建的bean匹配时.继承于BeanCreationException
+
+	**BeanCreationNotAllowedException**：尽管bean的创建目前不允许bean被请求（例如，在bean工厂的关闭阶段，但是在bean被请求的情况下抛出异常。.继承于BeanCreationException
 
     ***BeanInstantiationException***:当实例化一个bean是失败的时候抛出。携带有实例化失败的bean类
 
@@ -176,4 +184,4 @@
 
 	***CannotLoadBeanClassException***:当bean工厂BeanFactory不能加载一个指定bean类的信息的时候抛出的异常
 
-   
+    **BeanDefinitionStoreException**：当bean工厂遇到一个无效的bean定义时抛出的异常
