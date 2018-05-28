@@ -126,54 +126,54 @@
 ![](https://i.imgur.com/FMtaxnh.jpg)
 4. **非致命属性异常类：**
 
-	*PropertyBatchUpdateException*：组合异常，由个别的PropertyAccessException实例所构成。	
+   ***PropertyBatchUpdateException***：组合异常，由个别的PropertyAccessException实例所构成。	
     类对象在绑定处理过程的是被创建，并且如果必要的话添加这些错误。当遇到应用程序层级的
     PropertyAccessExceptions异常，这个绑定处理过程继续，应用那些可以应用的变化并且存储该类对象中的拒绝更改
 	
-	*PropertyAccessException*：属性访问相关的异常的基类
+   ***PropertyAccessException***：属性访问相关的异常的基类
 
-    *TypeMismatchException*：当视尝试设置一个bean属性时抛出的一个类型不匹配异常
+   ***TypeMismatchException***：当视尝试设置一个bean属性时抛出的一个类型不匹配异常
 
-    *MethodInvocationException*：当一个bean属性的getter或者setter方法抛出一个异常的时候抛出
+   ***MethodInvocationException***：当一个bean属性的getter或者setter方法抛出一个异常的时候抛出
 
-	*ConversionNotSupportedException*：当一个bean的属性发现没有合适的编辑器或者转换器的时候抛出的异常
+   ***ConversionNotSupportedException***：当一个bean的属性发现没有合适的编辑器或者转换器的时候抛出的异常
 
 5. **致命属性异常类**：
  
-    *InvalidPropertyException*:当引用一个无效的bean属性的时候抛出的异常
+    ***InvalidPropertyException***:当引用一个无效的bean属性的时候抛出的异常
 
-    *NotWritablePropertyException*:试图设置一个不可写的，没有setter方法的属性的异常
+    ***NotWritablePropertyException***:试图设置一个不可写的，没有setter方法的属性的异常
 
-    *NullValueInNestedPathException*:当导航一个无效的嵌套的属性路径时候遇到一个空指针异常
+    ***NullValueInNestedPathException***:当导航一个无效的嵌套的属性路径时候遇到一个空指针异常
 
-    *NotReadablePropertyException*:试图获得一个属性值的异常 这是不可读的，因为没有getter方法
+    ***NotReadablePropertyException***:试图获得一个属性值的异常 这是不可读的，因为没有getter方法
 
 6. **非致命bean异常类**：
 
-	*BeanNotOfRequiredTypeException*: 当一个bean不匹配期望的类型的时候抛出的异常
+	***BeanNotOfRequiredTypeException***: 当一个bean不匹配期望的类型的时候抛出的异常
 
-	*BeanIsNotAFactoryException*:当一个bean不是一个工厂，但是一个用户试图获取根据给定的bean名称获取这个工
+	***BeanIsNotAFactoryException***:当一个bean不是一个工厂，但是一个用户试图获取根据给定的bean名称获取这个工
 	厂的是抛出的异常.一个bean是否是一个工厂取决于它是否实现FactoryBean这个接口。
 	继承于BeanIsNotAFactoryException接口
 
-	*NoSuchBeanDefinitionException*:当一个BeanFactory调用一个bean实例化的时候没有发现一个定义的时候抛出的
+	***NoSuchBeanDefinitionException***:当一个BeanFactory调用一个bean实例化的时候没有发现一个定义的时候抛出的
 	异常这可能意味着一个不存在的bean，一个不唯一的bean或者一个手动注册的单例实例化没有关联bean定义的bean
 
-	*NoUniqueBeanDefinitionException*:当一个bean工厂BeanFactory调用一个ban实例的时候被发现有匹配的有多个
+	***NoUniqueBeanDefinitionException***:当一个bean工厂BeanFactory调用一个ban实例的时候被发现有匹配的有多个
 	候选然而只需要匹配一个期望的时候。继承于NoSuchBeanDefinitionException
 
 
 7. **致命bean异常类**：
 
-   *BeanInstantiationException*:当实例化一个bean是失败的时候抛出。携带有实例化失败的bean类
+    ***BeanInstantiationException***:当实例化一个bean是失败的时候抛出。携带有实例化失败的bean类
 
-	*BeanExpressionException*:表示表达式评估尝试失败的异常
+	***BeanExpressionException***:表示表达式评估尝试失败的异常
 
-	*FactoryBeanNotInitializedException*:如果一个bean还没有完成的初始化（比如因为他调用一个循环引用）的时候
+	***FactoryBeanNotInitializedException***:如果一个bean还没有完成的初始化（比如因为他调用一个循环引用）的时候
  	调用FactoryBean的getObject方法的时候抛出的异常.注意：与FactoryBean的循环引用不能通过急切地缓存单例实例来
 	解决，就像普通bean一样.原因是每个FactoryBean在他返回创建bean之前需要一个完整的初始化，而仅仅只需要初始化特殊
 	的正常bean。也就说，如果一个合作bean实际在初始化的时候调用他们 而不是仅仅保存引用
 
-	*CannotLoadBeanClassException*:当bean工厂BeanFactory不能加载一个指定bean类的信息的时候抛出的异常
+	***CannotLoadBeanClassException***:当bean工厂BeanFactory不能加载一个指定bean类的信息的时候抛出的异常
 
    
