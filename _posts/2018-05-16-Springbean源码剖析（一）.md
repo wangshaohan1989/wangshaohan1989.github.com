@@ -86,12 +86,7 @@
 1. **BeanMetadataElement**
 	Bean元数据元素 由携带配置源对象的bean元数据元素实现的接口
 
-2. **AttributeAccessor** 属性访问器 接口定义一个通用规范，用于附加和访问任意对象的元数据。
-
-3. AttributeAccessor的实现类，提供一个所有方法的基本实现。由子类进行扩展
-
-4. **BeanMetadataAttributeAccessor**扩展AttributeAccessorSupport类，将属性作为BeanMetadataAttribute
-对象，以便跟踪定义源
+2.
 
 5. **BeanDefinition**   一个BeanDefinition描述了一个有属性值，构造器参数值以及由具体是西安提供的进一步信息
 bean实例。
@@ -117,8 +112,24 @@ bean。 它可能是从多个原始的bean定义中创建的，它们彼此继�
 bean属性的实例。
 	
 
+## 三、bean属性类结构分析 ##
+![](https://i.imgur.com/TmWQguV.png)
 
-## 三、bean包装类结构分析 ##
+1. BeanMetadataAttribute
+
+2. **AttributeAccessor接口** 属性访问器 接口定义一个通用规范，用于附加和访问任意对象的元数据。
+3. AttributeAccessorSupport: AttributeAccessor的实现类，提供一个所有方法的基本实现。由子类进行扩展
+
+4. **BeanMetadataAttributeAccessor**扩展AttributeAccessorSupport类，将属性作为BeanMetadataAttribute
+对象，以便跟踪定义源
+
+5. AutowireCandidateQualifier
+
+6. PropertyValue
+
+7. PropertyValues
+
+## 四、bean包装类结构分析 ##
 
 ![](https://i.imgur.com/XxGrhsr.jpg)
 ## 四、资源类结构分析 ##
