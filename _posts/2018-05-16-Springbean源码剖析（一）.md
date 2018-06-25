@@ -85,13 +85,36 @@
 ![](https://i.imgur.com/CmFlnQw.jpg)
 1. **BeanMetadataElement**
 	Bean元数据元素 由携带配置源对象的bean元数据元素实现的接口
+
 2. **AttributeAccessor** 属性访问器 接口定义一个通用规范，用于附加和访问任意对象的元数据。
+
 3. AttributeAccessor的实现类，提供一个所有方法的基本实现。由子类进行扩展
-4. **BeanMetadataAttributeAccessor**扩展AttributeAccessorSupport类，将属性作为BeanMetadataAttribute对象，以便跟踪定义源
-5. **BeanDefinition**   一个BeanDefinition描述了一个有属性值，构造器参数值以及由具体是西安提供的进一步信息bean实例  这是一个最小化接口：主要的目的是允许一个BeanFactoryPostProcessor比如：PropertyPlaceholderConfigurer，反射和修改属性值和其他bean的元数据
-6. **AbstractBeanDefinition** 用于具体的、成熟的BeanDefinition类的基类，分解GenericBeanDefinition、RootBeanDefinition和ChildBeanDefinition的常见属性
-7. **RootBeanDefinition** 一个根bean定义表示合并后的bean定义，它在运行时支持Spring BeanFactory中的特定bean。 它可能是从多个原始的bean定义中创建的，它们彼此继承，通常被注册为GenericBeanDefinition。 根bean定义实质上是“统一”在运行时视图bean定义。 在配置时期，根bean定义还可以用于注册个人的bean定义。然而，自Spring 2.5版本以来，以编码方式注册bean的定义的优先方式是GenericBeanDefinition类。 GenericBeanDefinition有优势，允许动态定义双亲依赖，而不是“硬编码”作为根bean定义的角色
-8. 
+
+4. **BeanMetadataAttributeAccessor**扩展AttributeAccessorSupport类，将属性作为BeanMetadataAttribute
+对象，以便跟踪定义源
+
+5. **BeanDefinition**   一个BeanDefinition描述了一个有属性值，构造器参数值以及由具体是西安提供的进一步信息
+bean实例。
+   这是一个最小化接口：主要的目的是允许一个BeanFactoryPostProcessor比如：PropertyPlaceholderConfigurer，
+反射和修改属性值和其他bean的元数据
+   BeanDefinition是配置文件<bean>元素标签在Spring容器内的表示形式。BeanDefinition拥有和<bean>标签相对应的
+属性，比如beanClass,scope,lazyInit分别等 分别对应<bean>标签内的class,scope,layz-init属性。
+   最后注册到BeanDefinitionRegistry中。
+
+6. **AbstractBeanDefinition** 用于具体的、成熟的BeanDefinition类的基类，分解GenericBeanDefinition、
+RootBeanDefinition和ChildBeanDefinition的常见属性
+
+7. **RootBeanDefinition** 一个根bean定义表示合并后的bean定义，它在运行时支持Spring BeanFactory中的特定
+bean。 它可能是从多个原始的bean定义中创建的，它们彼此继承，通常被注册为GenericBeanDefinition。 根bean定义实
+质上是“统一”在运行时视图bean定义。 在配置时期，根bean定义还可以用于注册个人的bean定义。然而，自Spring 2.5版本
+以来，以编码方式注册bean的定义的优先方式是GenericBeanDefinition类。 GenericBeanDefinition有优势，允许动态
+定义双亲依赖，而不是“硬编码”作为根bean定义的角色
+   在嵌套bean定义中用于表示父（上一级）bean。
+
+8. **ChildBeanDefinition**  在嵌套bean定义中表示子bean
+
+9. **GenericBeanDefinition**  是自2.5版本以后新加入的bean文件配置属性定义类，是一站式服务类。也是用于承载
+bean属性的实例。
 	
 
 
@@ -107,9 +130,29 @@
 ## 六、bean定义解析类结构分析 ##
 
 
+## 七、bean定义注册类结构分析 ##
+![](https://i.imgur.com/gJe5XZd.png)
 
+1. AliasRegistry接口
 
-## 七、bean异常类结构分析 ##
+2. BeanDefinitionRegistry接口
+
+3. SimpleAliasRegistry接口
+
+4.** SimpleBeanDefinitionRegistry** 实现BeanDefinitionRegistry接口<br/>
+    SimpleBeanDefinitionRegistry类定义一个包含bean定义的字段：beanDefinitionMap<br/> 
+	`/** Map of bean definition objects, keyed by bean name */`
+`private final Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>(64);`
+	bean定义注册过程中的终极目标就想包含bean定义的BeanDefinition信息添加到beanDefinitionMap字段中。bean信
+息的读取也是从这里面读取的。
+
+5. SingletonBeanRegistry接口
+
+6. DefaultSingletonBeanRegistry
+
+7. FactoryBeanRegistrySupport
+
+## 八、bean异常类结构分析 ##
 ![](https://i.imgur.com/ssv1w5Y.jpg)
 
 ###1、Spring-bean异常类的基本结构###
@@ -152,35 +195,41 @@
 
 	***BeanNotOfRequiredTypeException***: 当一个bean不匹配期望的类型的时候抛出的异常
 
-	***BeanIsNotAFactoryException***:当一个bean不是一个工厂，但是一个用户试图获取根据给定的bean名称获取这个工
+	***BeanIsNotAFactoryException***:
+		当一个bean不是一个工厂，但是一个用户试图获取根据给定的bean名称获取这个工
 	厂的是抛出的异常.一个bean是否是一个工厂取决于它是否实现FactoryBean这个接口。
 	继承于BeanIsNotAFactoryException接口
 
-	***NoSuchBeanDefinitionException***:当一个BeanFactory调用一个bean实例化的时候没有发现一个定义的时候抛出的
+	***NoSuchBeanDefinitionException***:
+		当一个BeanFactory调用一个bean实例化的时候没有发现一个定义的时候抛出的
 	异常这可能意味着一个不存在的bean，一个不唯一的bean或者一个手动注册的单例实例化没有关联bean定义的bean
 
-	***NoUniqueBeanDefinitionException***:当一个bean工厂BeanFactory调用一个ban实例的时候被发现有匹配的有多个
-	候选然而只需要匹配一个期望的时候。继承于NoSuchBeanDefinitionException
+	***NoUniqueBeanDefinitionException***:
+		当一个bean工厂BeanFactory调用一个ban实例的时候被发现有匹配的有多个候选然而只需要匹配一个期望的时候。
+	继承于NoSuchBeanDefinitionException
 	
 
 7. **致命bean异常类**：
 
 	**BeanCreationException**:在一个BeanFactory bean工厂当试图从一个bean定义创建一个bean的时候遇到一个
 错误抛出的异常
-	***BeanCurrentlyInCreationException***:在引用一个当前正在创建的bean的时候抛出的异常,通常发生在构造器自动装
-	配与当前构建的bean匹配时.继承于BeanCreationException
+	***BeanCurrentlyInCreationException***:在引用一个当前正在创建的bean的时候抛出的异常,通常发生在构造器
+自动装配与当前构建的bean匹配时.继承于BeanCreationException
 
-	**BeanCreationNotAllowedException**：尽管bean的创建目前不允许bean被请求（例如，在bean工厂的关闭阶段，但是在bean被请求的情况下抛出异常。.继承于BeanCreationException
+	**BeanCreationNotAllowedException**：尽管bean的创建目前不允许bean被请求（例如，在bean工厂的关闭阶段
+，但是在bean被请求的情况下抛出异常。.继承于BeanCreationException
 
     ***BeanInstantiationException***:当实例化一个bean是失败的时候抛出。携带有实例化失败的bean类
 
 	***BeanExpressionException***:表示表达式评估尝试失败的异常
 
-	***FactoryBeanNotInitializedException***:如果一个bean还没有完成的初始化（比如因为他调用一个循环引用）的时候
- 	调用FactoryBean的getObject方法的时候抛出的异常.注意：与FactoryBean的循环引用不能通过急切地缓存单例实例来
-	解决，就像普通bean一样.原因是每个FactoryBean在他返回创建bean之前需要一个完整的初始化，而仅仅只需要初始化特殊
-	的正常bean。也就说，如果一个合作bean实际在初始化的时候调用他们 而不是仅仅保存引用
+	***FactoryBeanNotInitializedException***:
+		如果一个bean还没有完成的初始化（比如因为他调用一个循环引用）的时候调用FactoryBean的getObject方法的
+	时候抛出的异常.注意：与FactoryBean的循环引用不能通过急切地缓存单例实例来解决，就像普通bean一样.原因是每
+	个FactoryBean在他返回创建bean之前需要一个完整的初始化，而仅仅只需要初始化特殊的正常bean。也就说，如果一
+	个合作bean实际在初始化的时候调用他们 而不是仅仅保存引用
 
-	***CannotLoadBeanClassException***:当bean工厂BeanFactory不能加载一个指定bean类的信息的时候抛出的异常
+	***CannotLoadBeanClassException***:
+		当bean工厂BeanFactory不能加载一个指定bean类的信息的时候抛出的异常
 
     **BeanDefinitionStoreException**：当bean工厂遇到一个无效的bean定义时抛出的异常
