@@ -129,6 +129,26 @@ bean属性的实例。
 
 7. PropertyValues
 
+
+## 四、方法重写类结构分析 ##
+![](https://i.imgur.com/GFUXaX9.png)
+
+1. **MethodOverride**  
+		对象表示在一个由IoC容器对托管对象上的一个方法的重写
+
+2. **LookupOverride**
+		表示一个方法的覆盖，该方法在同一个IoC上下文中查找一个对象。主要用于在解析<bean>标签的lookup-method
+	属性的时候时候，将lookup-method属性解析成一个LookupOverride类。
+        lookup-method属性称之为获取注入器。获取注入器是一种特殊的方法注入，它是把一种方法声明为返回某种类型的
+    bean，但实际要返回的bean是在配置文件里面配置的，此方法可用在设计有些可插拔的功能上，解除程序依赖。
+
+3. **ReplaceOverride**
+
+4. **MethodOverrides**
+		一组方法覆盖，确定托管对象上的方法，如果有的话，Spring IoC容器将在运行时覆盖
+	`private final
+        Set<MethodOverride> overrides = Collections.synchronizedSet(new LinkedHashSet<>(2));`
+
 ## 四、bean包装类结构分析 ##
 
 ![](https://i.imgur.com/XxGrhsr.jpg)
