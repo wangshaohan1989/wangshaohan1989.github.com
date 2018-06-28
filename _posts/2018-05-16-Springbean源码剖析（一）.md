@@ -97,7 +97,14 @@ bean实例。
    最后注册到BeanDefinitionRegistry中。
 
 6. **AbstractBeanDefinition** 用于具体的、成熟的BeanDefinition类的基类，分解GenericBeanDefinition、
-RootBeanDefinition和ChildBeanDefinition的常见属性
+RootBeanDefinition和ChildBeanDefinition的常见属性。<br/>
+	属性有：<br/>
+	（1）methodOverrides MethodOverrides<br/>
+
+  	（2）constructorArgumentValues ConstructorArgumentValues 作为bean定义的一部分：持有构造器参数值<br/>
+
+	（3）propertyValuese MutablePropertyValues <br/>
+
 
 7. **RootBeanDefinition** 一个根bean定义表示合并后的bean定义，它在运行时支持Spring BeanFactory中的特定
 bean。 它可能是从多个原始的bean定义中创建的，它们彼此继承，通常被注册为GenericBeanDefinition。 根bean定义实
@@ -117,7 +124,7 @@ bean属性的实例。
 
 1. BeanMetadataAttribute
 
-2. **AttributeAccessor接口** 属性访问器 接口定义一个通用规范，用于附加和访问任意对象的元数据。
+2. **AttributeAccessor接口**<br/> 属性访问器 接口定义一个通用规范，用于附加和访问任意对象的元数据。
 3. AttributeAccessorSupport: AttributeAccessor的实现类，提供一个所有方法的基本实现。由子类进行扩展
 
 4. **BeanMetadataAttributeAccessor**扩展AttributeAccessorSupport类，将属性作为BeanMetadataAttribute
@@ -133,21 +140,40 @@ bean属性的实例。
 ## 四、方法重写类结构分析 ##
 ![](https://i.imgur.com/GFUXaX9.png)
 
-1. **MethodOverride**  
+1. **MethodOverride**  <br/>
 		对象表示在一个由IoC容器对托管对象上的一个方法的重写
 
-2. **LookupOverride**
-		表示一个方法的覆盖，该方法在同一个IoC上下文中查找一个对象。主要用于在解析<bean>标签的lookup-method
-	属性的时候时候，将lookup-method属性解析成一个LookupOverride类。
-        lookup-method属性称之为获取注入器。获取注入器是一种特殊的方法注入，它是把一种方法声明为返回某种类型的
+2. **LookupOverride**继承自MethodOverride类<br/>
+		表示一个方法的覆盖，该方法在同一个IoC上下文中查找一个对象。lookup-method标签在容器内的表示。
+		主要用于在解析<bean>标签内的子标签lookup-method标签的时候时候，将lookup-method标签解析成一个
+	LookupOverride类。
+        lookup-method标签称之为获取注入器。获取注入器是一种特殊的方法注入，它是把一种方法声明为返回某种类型的
     bean，但实际要返回的bean是在配置文件里面配置的，此方法可用在设计有些可插拔的功能上，解除程序依赖。
 
-3. **ReplaceOverride**
+3. **ReplaceOverride**继承自MethodOverride类。<br/>
+	表示一个方法替换，replace-method标签在容器的一个表示。
+	replace-method可以在运行时用新的方法替换现有的方法，与look-up不同的是，replace-method不但可以动态的替
+换返回实体bean，还能够动态更改原有方法的逻辑。
 
-4. **MethodOverrides**
-		一组方法覆盖，确定托管对象上的方法，如果有的话，Spring IoC容器将在运行时覆盖
+4. **MethodOverrides**<br/>
+		表示对象的一组方法覆盖，确定托管对象上的方法，如果有的话，Spring IoC容器将在运行时覆盖
 	`private final
-        Set<MethodOverride> overrides = Collections.synchronizedSet(new LinkedHashSet<>(2));`
+        Set<MethodOverride> overrides = Collections.synchronizedSet(new LinkedHashSet<>(2));`<br/>
+    MethodOverrides主要作用是作为AbstractBeanDefinition的一个私有属性，也就说bean定义中包含了其相关的所
+由的方法重写信息。
+   
+## 五、bean引用类结构分析 ##
+
+1. **BeanReference**<br/>
+	以抽象的方式公开对bean名称的引用的接口. 这个接口并不一定意味着对实际bean实例的引用;它只是表示一个
+bean的名称的逻辑引用。 
+	作为通用接口，由任何类型的bean引用持有者实现，例如RuntimeBeanReference和RuntimeBeanNameReference	
+
+2. **RuntimeBeanReference**<br/>
+	当属性值对象是工厂中另一个bean的引用时，用于属性值对象的不可变占位符类，在运行时解析。
+	对应各标签内的ref属性。
+3. **RuntimeBeanNameReference**<br/>
+	在工厂中引用另一个bean名称时，用于属性值对象的不可变占位符类，以便在运行时解析
 
 ## 四、bean包装类结构分析 ##
 
