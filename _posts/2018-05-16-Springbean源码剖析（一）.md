@@ -175,6 +175,10 @@ bean的名称的逻辑引用。
 3. **RuntimeBeanNameReference**<br/>
 	在工厂中引用另一个bean名称时，用于属性值对象的不可变占位符类，以便在运行时解析
 
+## 六、XML Document解析类结构分析 ##
+### 1、自定义标签解析相关类结构分析 ###
+![](https://i.imgur.com/S4z1bXB.jpg)
+
 ## 四、bean包装类结构分析 ##
 
 ![](https://i.imgur.com/XxGrhsr.jpg)
