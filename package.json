@@ -3,12 +3,12 @@
     "title": "北山望",
     "author": "Author By 北山望<420877730@qq.com>",
     "version": "1.7.0",
-    "homepage": "http://hanwang945.github.io",
+    "homepage": "http://wangshaohan1989.github.io",
     "repository": {
         "type": "git",
-        "url": "https://github.com/HanWang945/hanwang945.github.com.git"
+        "url": "https://github.com/wangshaohan1989/wangshaohan1989.github.com.git"
     },
-    "bugs": "https://github.com/HanWang945/hanwang945.github.io/issues",
+    "bugs": "https://github.com/wangshaohan1989/wangshaohan1989.github.io/issues",
     "devDependencies": {
         "grunt": "~0.4.5",
         "grunt-contrib-less": "~0.11.4",
