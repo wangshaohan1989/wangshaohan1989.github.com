@@ -12,7 +12,7 @@ github_repo: "https://github.com/wangshaohan1989/wangshaohan1989.github.com.git"
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: "北山望"
-sidebar-avatar: /img/Itachi.jpg    # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-avatar: /img/WechatIMG2.jpeg    # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
