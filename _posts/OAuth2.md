@@ -38,9 +38,7 @@
 
 
 ### （三）OAuth2.0 授权流程：
-![OAuth2.0交互过程](\_imgs\Oauth2process.png)
-
-![OAuth2.0交互过程](/_imgs/Oauth2process.png)
+![OAuth2.0交互过程](/wangshaohan1989.github.io/_posts/_imgs/Oauth2process.png)
 
 * **步骤0：客户端系统备案**
 客户端注册实例，获取客户端ID（client_id）和客户端秘钥（client_secret）标识客户端的身份，用于客户端向授权服务器请求授权时的进行身份认证的凭据。未经系统备案的客户端，授权服务器禁止为其发放授权码、访问令牌等，也访问不了受保护的资源服务器。
